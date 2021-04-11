@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Бодлогууд</title>
+</head>
+<script>
+    function digitSum() {
+        var FirstNumber;
+        var SecondNumber;
+        var sum;
+        var Number1;
+        var Number2;
+        sum = 0;
+        FirstNumber = window.prompt("Эхний тоогоо оруулна уу: ", "0");
+        SecondNumber = window.prompt("Хоёр дахь тоогоо оруулна уу: ", "0");
+        Number1 = parseInt(FirstNumber);
+        Number2 = parseInt(SecondNumber);
+        while(Number1 != 0 && Number2 != 0) {
+            if(Number1 != 0){
+                sum = parseInt(sum) + Number1 % 10
+                Number1 /= 10;
+            }
+            if(Number2 != 0){
+                sum = parseInt(sum) + Number2 % 10
+                Number2 /= 10;
+            }
+        }
+        document.writeln("Энэ 2 тооны цифрүүдийн нийлбэр бол: " + sum);
+    }
+    function StrongOrWeak() {
+        var a;
+        a = window.prompt("pswd oruulna uu: ");
+        var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{10,})");
+        // var mediumRegex = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
+        if(strongRegex.test(a)) {
+            document.writeln("<h1>Хүчтэй нууц үг</h1>");
+        } 
+        else {
+            document.writeln("<h3>Хүчтэй нууц үг биш.</h3>");
+        }
+    }
+    function PrimeNumber() {
+        var n;
+        var i;
+        var l;
+        var b;
+        var total;
+        total = parseInt(0);
+        n = window.prompt("Та тоогоо оруулна уу: ");
+        for(i=parseInt(2) ; i<=parseInt(n) ; i++) {
+                 for(l=parseInt(2) ; l<=parseInt(i/2) ; l++) {
+                 if(i % l == 0) {
+                    b = false;
+                    break
+                }
+                else b = true;
+            }
+            if(i==2) b=true;
+            if(i==3) b=true;
+             if(b) {
+                document.writeln(i);
+                total = total + i;
+                }
+        }
+        document.writeln("<br>");
+        document.writeln(n + " хүртэл анхны тоонуудын нийлбэр нь: " + total);
+    }
+    function countWords() {
+        var text = window.prompt("Өгүүлбэр: ","Заавал кириллээр бичнэ үү!");
+        var wordCount = 0;
+        var maleWord = 0;
+        var femaleWord = 0;
+        var state = 1;
+        for (var i = 1; i <= text.length; i++) {
+            if (text[i] == ' ') {
+            wordCount++;
+            }
+            if(i==text.length) wordCount++;
+        }
+        for (var i = 1; i <= text.length; i++) {
+            if(state == 1){    
+                if ((text[i] == 'А')||(text[i] == 'О')||(text[i] == 'У')||(text[i] == 'а')||(text[i] == 'о')||(text[i] == 'у')) {
+                maleWord++;
+                state = 2;
+                }
+            }
+            if(state == 2) {
+                if(text[i] == " ") {
+                    state = 1;
+                }
+            }
+        }
+        femaleWord = wordCount - maleWord;
+        document.writeln(text);
+        document.writeln("<br>");
+        document.writeln("Эр үг: " + maleWord);
+        document.writeln("Эм үг: " + femaleWord);
+    }
+    function bair() {
+        var Dawhar,orts,haalgaToo,toot,a,b,c,d;
+        var a1,b1,c1,d1;
+        a1 = window.prompt("Давхарын тоо ");
+        b1 = window.prompt("Орц ");
+        c1 = window.prompt("Давхар дахь хаалганы тоо ");
+        d1 = window.prompt("Тоот ");
+        Dawhar = parseInt(a1);
+        orts = parseInt(b1);
+        haalgaToo = parseInt(c1);
+        toot = parseInt(d1);
+            if(toot%(Dawhar*haalgaToo)==0) a=toot/(Dawhar*haalgaToo);
+            else a=parseInt(toot/(Dawhar*haalgaToo))+1;
+            b=parseInt(toot-(a-1)*Dawhar*haalgaToo);
+            if(b%haalgaToo==0) c=b/haalgaToo;
+            else c=parseInt(b/haalgaToo+1);
+            d=b-(c-1)*haalgaToo;
+            if(d==0) d=haalgaToo;
+        document.writeln("<h2>");
+        document.writeln(a + " -р орцны " + c + " давхарын " + d + " -р хаалга.");
+        document.writeln("</h2>");
+    }
+</script>
+<style>
+    body {
+        /* display: flex; */
+        font-size: 30px;
+    }
+    a {
+        text-decoration: none;
+        color: black;
+        display: flex;
+        justify-content: center;
+    }
+    div {
+        border: black solid 1px;
+        margin-top: 10px;
+    }
+</style>
+<body>
+    <div><a href="#" onclick="digitSum()">Цифрийн нийлбэр олох</a></div>
+    <div><a href="#" onclick="StrongOrWeak()">Өгсөн нууц үг хүчтэй эсэхийг шалгах</a></div>
+    <div><a href="#" onclick="PrimeNumber()">Гараас өгсөн тоо хүртэлх анхны тоо хэвлээд нэмэх</a></div>
+    <div><a href="#" onclick="countWords()">Эр үг, эм үг тоолох</a></div>
+    <div><a href="#" onclick="bair()">Хэддүгээр орцны хэдэн давхарын хэд дэх хаалгыг олох</a></div>
+</body>
+</html>
